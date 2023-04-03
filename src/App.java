@@ -26,7 +26,7 @@ public class App {
 
     
 
-        // exibire manipular os dados 
+        // exibire manipular os dados commit
         for (Map<String,String> filme : listaDeFilmes) {
             System.out.println(filme.get("title"));
             System.out.println(filme.get("image"));
