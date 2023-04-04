@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -23,15 +26,39 @@ public class App {
         var parser = new JsonParser();
         List<Map<String, String>> listaDeFilmes = parser.parse(body);
     
+        //cria diretorio para arquivar as imagens caso ainda não exista
+        var diretorio = new File("figurinhas/");
+        diretorio.mkdir();
 
-    
+        // exibire manipular os dados
+        // para cada um dos titulos, pega a url
+        var geradora = new GeradoraDeFigurinhas();
+        
+        // for para todos os filmes
+       // for (Map<String,String> filme : listaDeFilmes) {
 
-        // exibire manipular os dados commit
-        for (Map<String,String> filme : listaDeFilmes) {
-            System.out.println(filme.get("title"));
-            System.out.println(filme.get("image"));
-            System.out.println(filme.get("imDbRating"));
+        // for para os cinco primeiros filmes
+        for (int index = 0; index < 5; index++) {
+            var filme = listaDeFilmes.get(index);
+            
+        
+
+            String urlImagem = filme.get("image");
+            String titulo = filme.get("title");
+
+            
+
+            InputStream inputStream = new URL(urlImagem).openStream();
+            String nomeArquivo = "figurinhas/" + titulo + ".png";
+
+            
+            geradora.cria(inputStream, nomeArquivo);   
+
+            
+            System.out.println(titulo);
             System.out.println();
         }
     }
+
 }
+
