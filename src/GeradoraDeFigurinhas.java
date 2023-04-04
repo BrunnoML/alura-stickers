@@ -1,10 +1,12 @@
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 //import java.net.URL;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 
 import javax.imageio.ImageIO;
 
@@ -34,12 +36,17 @@ public class GeradoraDeFigurinhas {
     graphics.drawImage(imagemOriginal, 0, 0, null);
 
     // configurar a fonte
-    var fonte = new Font(Font.SANS_SERIF, Font.BOLD, 100);
-    graphics.setColor(Color.BLUE);
+    var fonte = new Font(Font.SERIF, Font.BOLD, 100);
+    graphics.setColor(Color.YELLOW);
     graphics.setFont(fonte);
 
     // escrever uma frase na nova imagem
-    graphics.drawString("TOP!", 50, novaAltura -100);
+    String texto = "TOPZERA";
+    FontMetrics fontMetrics = graphics.getFontMetrics();
+    Rectangle2D retangulo = fontMetrics.getStringBounds(texto, graphics);
+    int larguraTexto = (int) retangulo.getWidth();
+    int posicaoTextoX = (largura - larguraTexto) / 2;
+    graphics.drawString(texto, posicaoTextoX, novaAltura -100);
 
     // escrever a nova imagem em um arquivo para pasta no computador
    // ImageIO.write(novaImagem, "png", new File("saida/figurinha.png"));
