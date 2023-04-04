@@ -52,7 +52,7 @@ public class App {
             String nomeArquivo = "figurinhas/" + titulo + ".png";
 
             
-            geradora.cria(inputStream, nomeArquivo);   
+            geradora.cria(inputStream, nomeArquivo, "TOPZERA");   
 
             
             System.out.println(titulo);
